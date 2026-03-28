@@ -9,19 +9,21 @@ class Router {
     function __construct($request){
         $this->url = $request["REQUEST_URI"];
         $this->method = $request["REQUEST_METHOD"];
+        self::urlPath();
+        self::inputData();
     }
 
-    static function extractUrl(){
-
+    static function urlPath(){
+        // kanske lägga in kontroll om url path null eller något som inte stämmer i path för extra säkerhet?
+        $parseUrl = parse_url($this->url, PHP_URL_PATH);
+        $this->url = ltrim($parseUrl, "/");
     }
 
     static function inputData() {
         if($method == "GET") {
-            $this->data = $_GET;
-            self::$method($data);
+            $this->input = $_GET;
         } else {
-            $this->data = file_get_contents('php://input');
-            self::$method($data);
+            $this->input = file_get_contents('php://input');
         }
     }
 
@@ -29,9 +31,10 @@ class Router {
     static function navigate(){
         switch ($url) {
             case "rpm":
+                self::rpmController($method, $input);
 
-
-
+            case "enginetemp":
+                self::engineTemp($method, $input);
         }
     }
 
