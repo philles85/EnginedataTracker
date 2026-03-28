@@ -11,6 +11,7 @@ class Router {
         $this->method = $request["REQUEST_METHOD"];
         self::urlPath();
         self::inputData();
+        self::options($request);
     }
 
     static function urlPath(){
@@ -27,10 +28,19 @@ class Router {
         }
     }
 
+    static function options($request){
+        Middleware::cors();
+        if($request["REQUEST_METHOD"] === "OPTIONS"){
+            http_response_code(200);
+            exit();
+        }
+    }
+
 
     static function navigate(){
         switch ($url) {
             case "rpm":
+                Middleware::cors();
                 self::rpmController($method, $input);
 
             case "enginetemp":
