@@ -39,12 +39,18 @@ class Router {
 
     static function navigate(){
         switch ($url) {
-            case "rpm":
+            case "enginevalues":
                 Middleware::cors();
-                self::rpmController($method, $input);
+                self::EngineValuesControllers($method, $input);
+                break;
 
-            case "enginetemp":
-                self::engineTemp($method, $input);
+            case "enginehistory":
+                self::EngineValuesHistoryController($method, $input);
+                break;
+            default: 
+                http_response_code(404);
+                echo json_encode(["error" => "Route not found"]); 
+                break;
         }
     }
 

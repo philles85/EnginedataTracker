@@ -1,6 +1,6 @@
 <?php
 
-    class RpmController {
+    class EngineValuesController {
 
         public $input;
 
@@ -19,15 +19,16 @@
 
 
         static function GET($input){
-            
-            if(iset($data[""])){
-                // Hämta utifrån specifik attribut
-            } else {
-                // Hämta allting utifrån urlPath, som är entitet namn
-                
-
+            if(empty($input)) {
+                // Skicka direkt till service för att hämta och kolla DB
+            } else {   
+                // Vi måste kolla attributen här
+                if(isset($input["time"])){
+                    
+                }
 
             }
+        
         }
 
 
