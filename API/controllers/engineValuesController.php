@@ -21,10 +21,19 @@
         static function GET($input){
             if(empty($input)) {
                 // Skicka direkt till service för att hämta och kolla DB
+                return EngineValuesService::getAll();
             } else {   
                 // Vi måste kolla attributen här
-                if(isset($input["time"])){
-                    
+                if(!isset($input["time"])){
+                    $dateTemplate = "\d{4}-\d{2}-\d{2}";
+                    if(!preg_match($dateTemplate, $input["time"])){
+                        return sendResponse(400, ["Error" => ""]);
+                    } else {
+                        // Antingen har vi en sendresponse här eller så har vi i service också så den returnerar json response hit och vidare
+                        return EngineValuesService::getByTime();
+                    }
+                } else {
+                    return sendResponse(400, ["Error" => ""]);
                 }
 
             }
