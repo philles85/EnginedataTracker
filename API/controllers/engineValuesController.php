@@ -30,7 +30,7 @@
                         return sendResponse(400, ["Error" => ""]);
                     } else {
                         // Antingen har vi en sendresponse här eller så har vi i service också så den returnerar json response hit och vidare
-                        return EngineValuesService::getByTime();
+                        return EngineValuesService::getByTime($input);
                     }
                 } else {
                     return sendResponse(400, ["Error" => ""]);
