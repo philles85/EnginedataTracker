@@ -24,11 +24,13 @@ class DbRW {
         }
     }
 
-    function readTable($table, $column = null, $value = null){
+    function readTable($table, $key = null, $value = null){
         if($column != null){
-           $sqlQuery = "SELECT * FROM '$table' WHERE '$column' = '$value'";
+           $sqlQuery = "SELECT * FROM '$table' WHERE '$key' = '$value'";
+            return $sqlQuery;
         } else {
             $sqlQuery = "SELECT * FROM 'table'";
+            return $sqlQuery;
         }
     }
 
@@ -45,6 +47,7 @@ class DbRW {
             }
             $sqlQuery = "INSERT INTO '$table' ('...$columns')
                 VALUES('...$values')";
+            return $this->readTable($table, )
         }
     }
 
