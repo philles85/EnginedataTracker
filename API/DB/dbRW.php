@@ -31,8 +31,6 @@ class DbRW {
             return $sqlQuery;
         } else {
             $sqlQuery = "SELECT * FROM 'table'";
-            
-            return $sqlQuery;
         }
     }
 
@@ -55,7 +53,7 @@ class DbRW {
     }
 
     function resetTable($table){
-         
+        $sqlQuery = "TRUNCATE TABLE '$table'";
     }
 
 }

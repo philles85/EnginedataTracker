@@ -64,7 +64,24 @@ class DbService{
         }
     }
 
+    function resetDataTable($table){
+        try {
+            $DB = new dbRW();
+            $DBconn = $DB->connectDB();
+            $tableReset = $DB->resetTable($table);
 
+            $readDbStatus = $DBconn->query($tableReset);
+
+            if(!$readDbStatus) {
+
+            } else {
+                $readTable = $DB->readTable($table);
+                return $readTable;
+            }
+        } catch(Exception $error) {
+
+        }
+    }
 
 
 }

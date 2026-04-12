@@ -67,7 +67,16 @@ class EngineValuesService {
     }
 
     static function deleteEngineValue($input){
-         
+        
+        if(empty($input)) {
+            $dbService = new dbService();
+            $serviceResetData = $dbService->resetDataTable("engine_values");
+            return $serviceResetData;
+        } else {
+            
+        }
+
+
     }
 
 
