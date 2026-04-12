@@ -15,12 +15,13 @@ class DbRW {
     }
 
     static function connectDB(){
+        // Try catch här för att fånga eventuella fel från uppkopplingen av sql databasen
         try {
-            $conn = new PDO("mysql:host=localhost;dbnamer='$databse'", $username, $password);
+            $conn = new PDO("mysql:host=localhost;dbname='$databse'", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;  
-        } catch(Exception $error){
-            
+        } catch(Exception $DBerror){
+                        
         }
     }
 
@@ -30,6 +31,7 @@ class DbRW {
             return $sqlQuery;
         } else {
             $sqlQuery = "SELECT * FROM 'table'";
+            
             return $sqlQuery;
         }
     }
@@ -47,8 +49,13 @@ class DbRW {
             }
             $sqlQuery = "INSERT INTO '$table' ('...$columns')
                 VALUES('...$values')";
-            return $this->readTable($table, )
+            
+
         }
+    }
+
+    function resetTable($table){
+         
     }
 
 }

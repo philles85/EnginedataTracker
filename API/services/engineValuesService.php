@@ -39,36 +39,33 @@ class EngineValuesService {
 
 
     static function postEngineValue($input){
-        // Try catch här för att fånga eventuella fel från uppkopplingen av sql databasen
-        try{
-            $DBRep = new dbRW();
-            $DBConnect = $DBRep->connectDB();
-    
-            $dateTemplate = "\d{4}-\d{2}-\d{2}";
-            if(!preg_match($dateTemplate, $input["time"])){
-                throw new Exception("Wrong format");
-            } else if(!is_numeric($input["coolanttemp"])){
-                throw new Exception("Wrong format");
-            } else if(!is_numeric($input["enginespeed"])){
-                throw new Exception("wrong format");
-            } else if(!is_numeric($input["fuelconsumption"]) && !is_float($input["fuelconsumption"])){
-                throw new Exception("wrong format");
-            } else if(!is_numeric($input["oiltemp"])){
-                throw new Exception("wrong format");
-            } else if(!is_numeric($input["oilpressure"]) && ! is_float($input["oilpressure"])){
-                throw new Exception("wrong format");
-            } else {
-                // Här insertas datan, sedan hämtas senaste id, och utifrån id hämtar vi hela objektet för att returnera
-                $DBWriteTable = $DBRep->writeTable("engine_values", $input); 
-                $insertedId = $DBConnect->lastInsertId();
-                $getPostedObject = $DBRep->readTable("engine_values", "id", $insertedId);
-                return $getPostedObject;
-            }  
-                
-        } catch(Exception){
-
-        }
         
+        $dateTemplate = "\d{4}-\d{2}-\d{2}";
+        if(!preg_match($dateTemplate, $input["time"])){
+            throw new Exception("Wrong format");
+        } else if(!is_numeric($input["coolanttemp"])){
+            throw new Exception("Wrong format");
+        } else if(!is_numeric($input["enginespeed"])){
+            throw new Exception("wrong format");
+        } else if(!is_numeric($input["fuelconsumption"]) && !is_float($input["fuelconsumption"])){
+            throw new Exception("wrong format");
+        } else if(!is_numeric($input["oiltemp"])){
+            throw new Exception("wrong format");
+        } else if(!is_numeric($input["oilpressure"]) && ! is_float($input["oilpressure"])){
+            throw new Exception("wrong format");
+        } else {
+        
+            $dbService = new dbService();
+            $serviceAddData = $dbService->addDataTable("engine_values", $input);
+
+            return $serviceData;
+
+        }  
+                
+    }
+
+    static function deleteEngineValue($input){
+         
     }
 
 
